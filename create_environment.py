@@ -48,6 +48,11 @@ def hash_password(password):
     """Hashes a password using SHA-256."""
     return hashlib.sha256(password.encode()).hexdigest()
 
+def create_database():
+    """Creates the database schema and populates it with dummy data."""
+    conn = create_connection()
+    cursor = conn.cursor()
+
 
 
 
