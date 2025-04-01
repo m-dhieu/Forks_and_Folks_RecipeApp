@@ -256,3 +256,12 @@ def view_and_hire_chefs(username):
     cursor = execute_query(conn, query)
     chefs = fetch_all(cursor)
     close_connection(conn)
+
+if chefs:
+        print("\nAvailable Chefs:")
+        for chef_id, chef_name, portfolio in chefs:
+            print(f"Chef ID: {chef_id}, Name: {chef_name}, Portfolio: {portfolio}")
+
+        chef_id = input("\nEnter the Chef ID to hire (or 'exit' to go back): ")
+        if chef_id.lower() == 'exit':
+            return
