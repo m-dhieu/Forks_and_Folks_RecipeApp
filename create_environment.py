@@ -381,3 +381,10 @@ def view_hiring_notifications(username):
 def main():
         """Main function to handle user interaction."""
             print("Welcome to Forks and Folks Recipe App!")
+
+            create_database()
+
+            while True:
+                 print("\n1. Signup")
+                 print("2. Login")
+                 print("3. Exit")
