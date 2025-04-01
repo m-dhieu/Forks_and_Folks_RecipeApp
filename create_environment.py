@@ -367,3 +367,6 @@ def view_hiring_notifications(username):
         INNER JOIN Users ON Chef_Hires.consumer_id = Users.user_id
         WHERE Chef_Hires.chef_id = (SELECT chef_id FROM Chefs INNER JOIN Users ON Chefs.user_id = Users.user_id WHERE Users.username = ?)
     '''
+    cursor = execute_query(conn, query, (username,))
+    hires = fetch_all(cursor)
+    close_connection(conn)
