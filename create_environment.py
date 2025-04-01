@@ -475,30 +475,51 @@ def view_edit_portfolio(username):
         print("Portfolio not found.")
     close_connection(conn)
 
-# Allows chefs to view hiring notifications.
+# Allows chefs to view and respond to hiring notifications.
 def view_hiring_notifications(username):
-    """Allows chefs to view hiring notifications."""
+    """Allows chefs to view hiring notifications and respond to them."""
     conn = create_connection()
     query = '''
-        SELECT Users.username, Chef_Hires.hire_date
+        SELECT Chef_Hires.hire_id, Users.username AS consumer_name, Chef_Hires.hire_date
         FROM Chef_Hires
         INNER JOIN Users ON Chef_Hires.consumer_id = Users.user_id
-        WHERE Chef_Hires.chef_id = (SELECT chef_id FROM Chefs INNER JOIN Users ON Chefs.user_id = Users.user_id WHERE Users.username = ?)
+        WHERE Chef_Hires.chef_id = (
+            SELECT chef_id FROM Chefs
+            INNER JOIN Users ON Chefs.user_id = Users.user_id
+            WHERE Users.username = ?
+        )
     '''
     cursor = execute_query(conn, query, (username,))
     hires = fetch_all(cursor)
-    close_connection(conn)
-    
-    # Check if the user is a chef
+
     if hires:
         print("\nHiring Notifications:")
-        for consumer_name, hire_date in hires:
-            print(f"Consumer: {consumer_name}, Hire Date: {hire_date}")
-    
-    # Check if the user is a chef
+        for hire_id, consumer_name, hire_date in hires:
+            print(f"Hire ID: {hire_id}, Consumer: {consumer_name}, Hire Date: {hire_date}")
+
+        while True:
+            choice = input("\nEnter the Hire ID to respond to (or 'exit' to go back): ")
+            if choice.lower() == 'exit':
+                break
+            if choice.isdigit():
+                hire_id = int(choice)
+                # Check if the hire ID exists
+                if any(hire[0] == hire_id for hire in hires):
+                    response = input("Do you want to accept or decline this request? (accept/decline): ").lower()
+                    if response in ['accept', 'decline']:
+                        message = input("Enter a message for the consumer: ")
+                        send_response_to_consumer(hire_id, response, message)
+                        print(f"Response '{response}' sent to the consumer.")
+                    else:
+                        print("Invalid response. Please enter 'accept' or 'decline'.")
+                else:
+                    print("Invalid Hire ID. Please try again.")
+            else:
+                print("Invalid input. Please enter a valid Hire ID.")
     else:
         print("No hiring notifications found.")
 
+    close_connection(conn)
 # Main function to handle user interaction.
 def main():
         """Main function to handle user interaction."""
