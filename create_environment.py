@@ -329,3 +329,15 @@ def create_recipe(username):
     else:
         print("Chef not found.")
     close_connection(conn)
+    
+def view_edit_portfolio(username):
+    """Allows chefs to view or edit their portfolio."""
+    conn = create_connection()
+    query = '''
+        SELECT Chefs.portfolio_details
+        FROM Chefs
+        INNER JOIN Users ON Chefs.user_id = Users.user_id
+        WHERE Users.username = ?
+    '''
+    cursor = execute_query(conn, query, (username,))
+    portfolio = fetch_one(cursor)
