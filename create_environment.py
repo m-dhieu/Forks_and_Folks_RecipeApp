@@ -309,3 +309,10 @@ if choice == '1':
             break
         else:
             print("Invalid choice! Try again.")
+
+def create_recipe(username):
+    """Allows chefs to create a recipe."""
+    conn = create_connection()
+    query = "SELECT user_id FROM Users WHERE username = ?"
+    cursor = execute_query(conn, query, (username,))
+    user = fetch_one(cursor)
