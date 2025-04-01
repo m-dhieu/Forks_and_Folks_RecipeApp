@@ -116,3 +116,17 @@ def create_database():
     cursor.execute("INSERT OR IGNORE INTO Chefs (user_id, portfolio_details) VALUES (4, 'Specializes in Kenyan cuisine.')")
     cursor.execute("INSERT OR IGNORE INTO Chefs (user_id, portfolio_details) VALUES (6, 'Specializes in Rwandan cuisine.')")
     cursor.execute("INSERT OR IGNORE INTO Chefs (user_id, portfolio_details) VALUES (7, 'Specializes in Sudani cuisine.')")
+
+ recipes = [
+        ("Spaghetti Carbonara", "spaghetti, eggs, pecorino cheese, pancetta, black pepper", "1. Cook pasta\n2. Fry pancetta\n3. Mix eggs and cheese\n4. Combine all ingredients\n", 3),
+        ("Classic Burger", "ground beef, burger buns, lettuce, tomato, onion, cheese", "1. Form patties\n2. Grill until done\n3. Assemble with toppings\n", 4),
+        ("Caesar Salad", "romaine lettuce, croutons, parmesan, caesar dressing", "1. Chop lettuce\n2. Add croutons and cheese\n3. Toss with dressing\n", 6),
+        ("Chocolate Chip Cookies", "flour, butter, sugar, eggs, chocolate chips", "1. Mix ingredients\n2. Form cookies\n3. Bake at 350F for 12 minutes\n", 7),
+        ("Chicken Stir Fry", "chicken breast, vegetables, soy sauce, oil, garlic", "1. Cut chicken\n2. Stir fry vegetables\n3. Add chicken and sauce\n", 4)
+    ]
+
+    for recipe in recipes:
+        cursor.execute('''
+            INSERT OR IGNORE INTO Recipes (recipe_name, ingredients, instructions, chef_id)
+            VALUES (?, ?, ?, ?)
+        ''', recipe)
