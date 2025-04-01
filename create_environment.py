@@ -400,3 +400,8 @@ def main():
                     signup(username, password, role)
                 else:
                     print("Invalid role. Please enter 'Chef' or 'Consumer'.")
+            
+            elif choice == '2':
+                username = input("Enter username: ")
+                password = input("Enter password: ")
+                user_id, username, role = login(username, password)
