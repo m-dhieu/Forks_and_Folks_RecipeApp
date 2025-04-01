@@ -265,3 +265,13 @@ if chefs:
         chef_id = input("\nEnter the Chef ID to hire (or 'exit' to go back): ")
         if chef_id.lower() == 'exit':
             return
+
+conn = create_connection()
+        consumer_query = "SELECT user_id FROM Users WHERE username = ?"
+        consumer_cursor = execute_query(conn, consumer_query, (username,))
+        consumer = fetch_one(consumer_cursor)
+
+conn = create_connection()
+        consumer_query = "SELECT user_id FROM Users WHERE username = ?"
+        consumer_cursor = execute_query(conn, consumer_query, (username,))
+        consumer = fetch_one(consumer_cursor)
