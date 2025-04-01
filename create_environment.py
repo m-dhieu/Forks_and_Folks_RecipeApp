@@ -221,3 +221,26 @@ def browse_ingredients():
             print(f"{ingredient_name} - Location: {location}")
     else:
         print("No ingredients found.")
+
+def consumer_menu(username):
+    """Displays the consumer menu."""
+    while True:
+        print("\nConsumer Menu:")
+        print("1. Browse Recipes")
+        print("2. Browse Ingredients")
+        print("3. View Chef Portfolios and Hire")
+        print("4. Exit")
+
+        choice = input("What do you wish to do?: ")
+
+        if choice == '1':
+            browse_recipes()
+        elif choice == '2':
+            browse_ingredients()
+        elif choice == '3':
+            view_and_hire_chefs(username)
+        elif choice == '4':
+            print("Exiting consumer menu...")
+            break
+        else:
+            print("Invalid choice! Try again.")
