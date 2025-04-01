@@ -357,3 +357,13 @@ def view_edit_portfolio(username):
     else:
         print("Portfolio not found.")
     close_connection(conn)
+    
+def view_hiring_notifications(username):
+    """Allows chefs to view hiring notifications."""
+    conn = create_connection()
+    query = '''
+        SELECT Users.username, Chef_Hires.hire_date
+        FROM Chef_Hires
+        INNER JOIN Users ON Chef_Hires.consumer_id = Users.user_id
+        WHERE Chef_Hires.chef_id = (SELECT chef_id FROM Chefs INNER JOIN Users ON Chefs.user_id = Users.user_id WHERE Users.username = ?)
+    '''
