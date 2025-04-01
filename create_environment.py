@@ -345,3 +345,12 @@ def view_edit_portfolio(username):
     if portfolio:
         print(f"\nYour Portfolio: {portfolio[0]}")
         edit_choice = input("Do you want to edit your portfolio? (yes/no): ").lower()
+        if edit_choice == 'yes':
+            new_portfolio = input("Enter new portfolio details: ")
+            update_query = '''
+                UPDATE Chefs
+                SET portfolio_details = ?
+                WHERE user_id = (SELECT user_id FROM Users WHERE username = ?)
+            '''
+            execute_query(conn, update_query, (new_portfolio, username))
+            print("Portfolio updated successfully!")
