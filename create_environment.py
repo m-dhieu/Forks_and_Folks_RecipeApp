@@ -377,3 +377,7 @@ def view_hiring_notifications(username):
             print(f"Consumer: {consumer_name}, Hire Date: {hire_date}")
     else:
         print("No hiring notifications found.")
+
+def main():
+        """Main function to handle user interaction."""
+            print("Welcome to Forks and Folks Recipe App!")
