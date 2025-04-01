@@ -75,5 +75,20 @@ def create_database():
     ''')
 
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Ingredients (
+            ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ingredient_name TEXT NOT NULL,
+            location TEXT
+        )
+    ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Chefs (
+            chef_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            portfolio_details TEXT,
+            FOREIGN KEY (user_id) REFERENCES Users(user_id)
+        )
+    ''')
 
