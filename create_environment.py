@@ -286,3 +286,14 @@ if consumer:
         close_connection(conn)
     else:
         print("No chefs available.")
+
+def chef_menu(username):
+    """Displays the chef menu."""
+    while True:
+        print("\nChef Menu:")
+        print("1. Create Recipe")
+        print("2. View/Edit Portfolio")
+        print("3. View Hiring Notifications")
+        print("4. Exit")
+
+        choice = input("What do you wish to do?: ")
