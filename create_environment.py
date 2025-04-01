@@ -354,3 +354,6 @@ def view_edit_portfolio(username):
             '''
             execute_query(conn, update_query, (new_portfolio, username))
             print("Portfolio updated successfully!")
+    else:
+        print("Portfolio not found.")
+    close_connection(conn)
