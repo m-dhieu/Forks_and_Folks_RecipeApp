@@ -298,7 +298,8 @@ def consumer_menu(username):
         print("1. Browse Recipes")
         print("2. Browse Ingredients")
         print("3. View Chef Portfolios and Hire")
-        print("4. Exit")
+        print("4. View Hiring Request Status")
+        print("5. Exit")
         
         # Prompt user for action
         choice = input("What do you wish to do?: ")
@@ -310,6 +311,8 @@ def consumer_menu(username):
         elif choice == '3':
             view_and_hire_chefs(username)
         elif choice == '4':
+            view_hiring_status(username)
+        elif choice == '5':
             print("Exiting consumer menu...")
             break
         else:
