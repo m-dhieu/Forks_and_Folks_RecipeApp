@@ -388,3 +388,10 @@ def main():
             print("\n1. Signup")
             print("2. Login")
             print("3. Exit")
+        
+            choice = input("Enter your choice: ")
+
+            if choice == '1':
+                username = input("Enter username: ")
+                password = input("Enter password: ")
+                role = input("Enter role (Chef or Consumer): ").capitalize()
