@@ -206,3 +206,18 @@ def browse_recipes():
                 print("Invalid choice. Please try again.")
     else:
         print("No recipes found.")
+
+def browse_ingredients():
+    """Allows users to browse ingredients."""
+    conn = create_connection()
+    query = "SELECT ingredient_name, location FROM Ingredients"
+    cursor = execute_query(conn, query)
+    ingredients = fetch_all(cursor)
+    close_connection(conn)
+
+    if ingredients:
+        print("\nAvailable Ingredients:")
+        for ingredient_name, location in ingredients:
+            print(f"{ingredient_name} - Location: {location}")
+    else:
+        print("No ingredients found.")
