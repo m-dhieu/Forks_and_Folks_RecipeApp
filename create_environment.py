@@ -520,6 +520,19 @@ def view_hiring_notifications(username):
         print("No hiring notifications found.")
 
     close_connection(conn)
+
+# Function to send responses to consumers.
+def send_response_to_consumer(hire_id, response, message):
+    """Sends the chef's response to the consumer."""
+    conn = create_connection()
+    query = '''
+        UPDATE Chef_Hires
+        SET response = ?, message = ?
+        WHERE hire_id = ?
+    '''
+    execute_query(conn, query, (response, message, hire_id))
+    close_connection(conn)
+    
 # Main function to handle user interaction.
 def main():
         """Main function to handle user interaction."""
