@@ -281,3 +281,8 @@ if consumer:
             hire_query = "INSERT INTO Chef_Hires (chef_id, consumer_id) VALUES (?, ?)"
             execute_query(conn, hire_query, (chef_id, consumer_id))
             print("Chef hired successfully!")
+    else:
+            print("Consumer not found.")
+        close_connection(conn)
+    else:
+        print("No chefs available.")
