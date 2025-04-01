@@ -145,3 +145,12 @@ def create_database():
         ("Buns", "250 Stores"),
         ("Soy Sauce", "Simba Kimironko")
     ]
+
+  for ingredient in ingredients:
+        cursor.execute('''
+            INSERT OR IGNORE INTO Ingredients (ingredient_name, location)
+            VALUES (?, ?)
+        ''', ingredient)
+
+    conn.commit()
+    close_connection(conn)
