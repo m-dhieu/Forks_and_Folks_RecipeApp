@@ -92,3 +92,13 @@ def create_database():
         )
     ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Chef_Hires (
+            hire_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            chef_id INTEGER,
+            consumer_id INTEGER,
+            hire_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (chef_id) REFERENCES Users(user_id),
+            FOREIGN KEY (consumer_id) REFERENCES Users(user_id)
+        )
+    ''')
