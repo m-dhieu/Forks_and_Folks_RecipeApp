@@ -405,3 +405,9 @@ def main():
                 username = input("Enter username: ")
                 password = input("Enter password: ")
                 user_id, username, role = login(username, password)
+                if user_id:
+                    print(f"Welcome, {username} as a ({role})!")
+                    if role == "Consumer":
+                        consumer_menu(username)
+                    elif role == "Chef":
+                        chef_menu(username) 
