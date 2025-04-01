@@ -223,7 +223,7 @@ def save_to_file(data, filename):
         
 # Allows consumers to browse recipes and view details.
 def browse_recipes():
-    """Allows users to browse recipes."""
+    """Allows users to browse recipes and save them."""
     conn = create_connection()
     query = "SELECT recipe_name, ingredients, instructions FROM Recipes"
     cursor = execute_query(conn, query)
@@ -246,6 +246,11 @@ def browse_recipes():
                 print(f"\nRecipe: {recipe[0]}")
                 print(f"Ingredients: {recipe[1]}")
                 print(f"Instructions:\n{recipe[2]}")
+                # Prompt to save the recipe
+                save_choice = input("Do you want to save this recipe to a file? (yes/no): ").lower()
+                if save_choice == 'yes':
+                    data = f"Recipe: {recipe[0]}\nIngredients: {recipe[1]}\nInstructions:\n{recipe[2]}"
+                    save_to_file(data, f"{recipe[0].replace(' ', '_')}_recipe.txt")
             else:
                 print("Invalid choice. Please try again.")
     else:
@@ -253,7 +258,7 @@ def browse_recipes():
 
 # Allows consumers to browse ingredients and view their locations.
 def browse_ingredients():
-    """Allows users to browse ingredients."""
+    """Allows users to browse ingredients' locations and save them."""
     conn = create_connection()
     query = "SELECT ingredient_name, location FROM Ingredients"
     cursor = execute_query(conn, query)
@@ -263,8 +268,25 @@ def browse_ingredients():
     # Display available ingredients
     if ingredients:
         print("\nAvailable Ingredients:")
-        for ingredient_name, location in ingredients:
-            print(f"{ingredient_name} - Location: {location}")
+        for i, (ingredient_name, location) in enumerate(ingredients, 1):
+            print(f"{i}. {ingredient_name} - Location: {location}")
+
+        while True:
+            choice = input("\nEnter ingredient number to view details (or 'exit' to go back): ")
+            if choice.lower() == 'exit':
+                break
+            if choice.isdigit() and 1 <= int(choice) <= len(ingredients):
+                ingredient = ingredients[int(choice) - 1]
+                print(f"\nIngredient: {ingredient[0]}")
+                print(f"Location: {ingredient[1]}")
+
+                # Prompt to save the ingredient location
+                save_choice = input("Do you want to save this ingredient location to a file? (yes/no): ").lower()
+                if save_choice == 'yes':
+                    data = f"Ingredient: {ingredient[0]}\nLocation: {ingredient[1]}"
+                    save_to_file(data, f"{ingredient[0].replace(' ', '_')}_location.txt")
+            else:
+                print("Invalid choice! Please try again.")
     else:
         print("No ingredients found.")
 
