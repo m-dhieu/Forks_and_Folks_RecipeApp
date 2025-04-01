@@ -164,3 +164,17 @@ def signup(username, password, role):
     execute_query(conn, query, params)
     close_connection(conn)
     print("Signup successful!")
+
+
+def login(username, password):
+    """Logs in a user."""
+    conn = create_connection()
+    query = "SELECT user_id, username, password, role FROM Users WHERE username = ?"
+    cursor = execute_query(conn, query, (username,))
+    user = fetch_one(cursor)
+    close_connection(conn)
+    if user:
+        user_id, username, stored_password, role = user
+        if verify_password(stored_password, password):
+            return user_id, username, role
+    return None, None, None
