@@ -110,6 +110,8 @@ def create_database():
             chef_id INTEGER,
             consumer_id INTEGER,
             hire_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+            response TEXT,
+            message TEXT,            
             FOREIGN KEY (chef_id) REFERENCES Users(user_id),
             FOREIGN KEY (consumer_id) REFERENCES Users(user_id)
         )
@@ -179,6 +181,19 @@ def signup(username, password, role):
     query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)"
     params = (username, hashed_password, role)
     execute_query(conn, query, params)
+    
+    # Prompt for portfolio details, if the user signs up as a chef.
+    if role.lower() == "chef":
+        cursor = conn.cursor()
+        cursor.execute("SELECT user_id FROM Users WHERE username = ?", (username,))
+        user = fetch_one(cursor)
+        if user:
+            user_id = user[0]
+            portfolio_details = input("Enter your portfolio details (e.g., specialties, experience): ")
+            chef_query = "INSERT INTO Chefs (user_id, portfolio_details) VALUES (?, ?)"
+            execute_query(conn, chef_query, (user_id, portfolio_details))
+            print("Portfolio created successfully!")
+    
     close_connection(conn)
     print("Signup successful!")
 
