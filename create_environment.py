@@ -107,3 +107,5 @@ def create_database():
     cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Gabriella', ?, 'Consumer')", (hash_password('password'),))
     cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Jessica', ?, 'Consumer')", (hash_password('password'),))
     cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Santhiana', ?, 'Chef')", (hash_password('pass'),))
+    cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Buke', ?, 'Chef')", (hash_password('pass'),))
+    cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Janviere', ?, 'Consumer')", (hash_password('password'),))
