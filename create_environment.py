@@ -48,6 +48,11 @@ def hash_password(password):
     """Hashes a password using SHA-256."""
     return hashlib.sha256(password.encode()).hexdigest()
 
+def verify_password(stored_password, provided_password):
+    """Verifies a hashed password."""
+    hashed_provided_password = hash_password(provided_password)
+    return stored_password == hashed_provided_password
+
 def create_database():
     """Creates the database schema and populates it with dummy data."""
     conn = create_connection()
@@ -63,7 +68,7 @@ def create_database():
         )
     ''')
     
-     cursor.execute('''
+    cursor.execute('''
         CREATE TABLE IF NOT EXISTS Recipes (
             recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
             recipe_name TEXT NOT NULL,
@@ -117,7 +122,7 @@ def create_database():
     cursor.execute("INSERT OR IGNORE INTO Chefs (user_id, portfolio_details) VALUES (6, 'Specializes in Rwandan cuisine.')")
     cursor.execute("INSERT OR IGNORE INTO Chefs (user_id, portfolio_details) VALUES (7, 'Specializes in Sudani cuisine.')")
 
- recipes = [
+    recipes = [
         ("Spaghetti Carbonara", "spaghetti, eggs, pecorino cheese, pancetta, black pepper", "1. Cook pasta\n2. Fry pancetta\n3. Mix eggs and cheese\n4. Combine all ingredients\n", 3),
         ("Classic Burger", "ground beef, burger buns, lettuce, tomato, onion, cheese", "1. Form patties\n2. Grill until done\n3. Assemble with toppings\n", 4),
         ("Caesar Salad", "romaine lettuce, croutons, parmesan, caesar dressing", "1. Chop lettuce\n2. Add croutons and cheese\n3. Toss with dressing\n", 6),
@@ -146,7 +151,7 @@ def create_database():
         ("Soy Sauce", "Simba Kimironko")
     ]
 
-  for ingredient in ingredients:
+    for ingredient in ingredients:
         cursor.execute('''
             INSERT OR IGNORE INTO Ingredients (ingredient_name, location)
             VALUES (?, ?)
@@ -257,7 +262,7 @@ def view_and_hire_chefs(username):
     chefs = fetch_all(cursor)
     close_connection(conn)
 
-if chefs:
+    if chefs:
         print("\nAvailable Chefs:")
         for chef_id, chef_name, portfolio in chefs:
             print(f"Chef ID: {chef_id}, Name: {chef_name}, Portfolio: {portfolio}")
@@ -266,22 +271,22 @@ if chefs:
         if chef_id.lower() == 'exit':
             return
 
-conn = create_connection()
+        conn = create_connection()
         consumer_query = "SELECT user_id FROM Users WHERE username = ?"
         consumer_cursor = execute_query(conn, consumer_query, (username,))
         consumer = fetch_one(consumer_cursor)
 
-conn = create_connection()
+        conn = create_connection()
         consumer_query = "SELECT user_id FROM Users WHERE username = ?"
         consumer_cursor = execute_query(conn, consumer_query, (username,))
         consumer = fetch_one(consumer_cursor)
 
-    if consumer:
+        if consumer:
             consumer_id = consumer[0]
             hire_query = "INSERT INTO Chef_Hires (chef_id, consumer_id) VALUES (?, ?)"
             execute_query(conn, hire_query, (chef_id, consumer_id))
             print("Chef hired successfully!")
-    else:
+        else:
             print("Consumer not found.")
         close_connection(conn)
     else:
@@ -418,7 +423,7 @@ def main():
                 break
             else:
                 print("Invalid choice! Please try again.")
-                
+
 # The main function is the entry point of the program.
 if __name__ == "__main__":
     main()
