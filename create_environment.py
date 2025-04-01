@@ -154,3 +154,13 @@ def create_database():
 
     conn.commit()
     close_connection(conn)
+
+def signup(username, password, role):
+    """Registers a new user."""
+    conn = create_connection()
+    hashed_password = hash_password(password)
+    query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)"
+    params = (username, hashed_password, role)
+    execute_query(conn, query, params)
+    close_connection(conn)
+    print("Signup successful!")
