@@ -375,3 +375,5 @@ def view_hiring_notifications(username):
         print("\nHiring Notifications:")
         for consumer_name, hire_date in hires:
             print(f"Consumer: {consumer_name}, Hire Date: {hire_date}")
+    else:
+        print("No hiring notifications found.")
