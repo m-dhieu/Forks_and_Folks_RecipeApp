@@ -102,3 +102,8 @@ def create_database():
             FOREIGN KEY (consumer_id) REFERENCES Users(user_id)
         )
     ''')
+
+# Insert sample data
+    cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Gabriella', ?, 'Consumer')", (hash_password('password'),))
+    cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Jessica', ?, 'Consumer')", (hash_password('password'),))
+    cursor.execute("INSERT OR IGNORE INTO Users (username, password, role) VALUES ('Santhiana', ?, 'Chef')", (hash_password('pass'),))
