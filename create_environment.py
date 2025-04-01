@@ -62,6 +62,17 @@ def create_database():
             role TEXT NOT NULL CHECK (role IN ('Chef', 'Consumer'))
         )
     ''')
+    
+     cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Recipes (
+            recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            recipe_name TEXT NOT NULL,
+            ingredients TEXT,
+            instructions TEXT,
+            chef_id INTEGER,
+            FOREIGN KEY (chef_id) REFERENCES Users(user_id)
+        )
+    ''')
 
 
 
