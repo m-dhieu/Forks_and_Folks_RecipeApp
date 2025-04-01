@@ -395,3 +395,8 @@ def main():
                 username = input("Enter username: ")
                 password = input("Enter password: ")
                 role = input("Enter role (Chef or Consumer): ").capitalize()
+                
+                if role in ["Chef", "Consumer"]:
+                    signup(username, password, role)
+                else:
+                    print("Invalid role. Please enter 'Chef' or 'Consumer'.")
