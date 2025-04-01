@@ -341,3 +341,7 @@ def view_edit_portfolio(username):
     '''
     cursor = execute_query(conn, query, (username,))
     portfolio = fetch_one(cursor)
+
+    if portfolio:
+        print(f"\nYour Portfolio: {portfolio[0]}")
+        edit_choice = input("Do you want to edit your portfolio? (yes/no): ").lower()
