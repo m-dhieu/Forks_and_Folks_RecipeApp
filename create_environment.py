@@ -410,4 +410,11 @@ def main():
                     if role == "Consumer":
                         consumer_menu(username)
                     elif role == "Chef":
-                        chef_menu(username) 
+                        chef_menu(username)
+                else:
+                    print("Invalid username or password. Please try again.")
+            elif choice == '3':
+                print("Exiting...")
+                break
+            else:
+                print("Invalid choice! Please try again.")
