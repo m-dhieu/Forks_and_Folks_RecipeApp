@@ -178,3 +178,31 @@ def login(username, password):
         if verify_password(stored_password, password):
             return user_id, username, role
     return None, None, None
+
+
+def browse_recipes():
+    """Allows users to browse recipes."""
+    conn = create_connection()
+    query = "SELECT recipe_name, ingredients, instructions FROM Recipes"
+    cursor = execute_query(conn, query)
+    recipes = fetch_all(cursor)
+    close_connection(conn)
+
+    if recipes:
+        print("\nAvailable Recipes:")
+        for i, (name, ingredients, instructions) in enumerate(recipes, 1):
+            print(f"{i}. {name}")
+
+        while True:
+            choice = input("\nEnter recipe number to view details (or 'exit' to go back): ")
+            if choice.lower() == 'exit':
+                break
+            if choice.isdigit() and 1 <= int(choice) <= len(recipes):
+                recipe = recipes[int(choice) - 1]
+                print(f"\nRecipe: {recipe[0]}")
+                print(f"Ingredients: {recipe[1]}")
+                print(f"Instructions:\n{recipe[2]}")
+            else:
+                print("Invalid choice. Please try again.")
+    else:
+        print("No recipes found.")
