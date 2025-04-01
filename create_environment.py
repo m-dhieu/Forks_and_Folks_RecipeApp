@@ -28,3 +28,14 @@ def execute_query(conn, query, params=None):
         print(f"Database error: {e}")
         return None
 
+""" notes:
+Fetches all rows of data from the result set of a previously executed SQL query. 
+   Returns None if the cursor is invalid.
+"""
+def fetch_all(cursor):
+    """Fetches all results from a cursor."""
+    if cursor:
+        return cursor.fetchall()
+    return None
+
+
