@@ -68,10 +68,10 @@ Users are prompted for their names and roles (Chef/Consumer) and are then direct
 ## Contact Information
 
 For any queries or feedback, reach out at:  
-[j.munezero@alustudent.com](mailto:j.munezero@alustudent.com)
-[g.buke@alustudent.com](mailto:g.buke@alustudent.com)
-[g.ahirwe@alustudent.com](mailto:g.ahirwe@alustudent.com)
-[a.gatego@alustudent.com](mailto:a.gatego@alustudent.com)
-[s.kaze@alustudent.com](mailto:s.kaze@alustudent.com)
-[t.ishimwe@alustudent.com](mailto:t.ishimwe@alustudent.com)
+[j.munezero@alustudent.com](mailto:j.munezero@alustudent.com)  
+[g.buke@alustudent.com](mailto:g.buke@alustudent.com)  
+[g.ahirwe@alustudent.com](mailto:g.ahirwe@alustudent.com)  
+[a.gatego@alustudent.com](mailto:a.gatego@alustudent.com)  
+[s.kaze@alustudent.com](mailto:s.kaze@alustudent.com)  
+[t.ishimwe@alustudent.com](mailto:t.ishimwe@alustudent.com)  
 [m.dhieu@alustudent.com](mailto:m.dhieu@alustudent.com)
