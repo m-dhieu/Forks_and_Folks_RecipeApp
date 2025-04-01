@@ -365,6 +365,33 @@ def view_and_hire_chefs(username):
     else:
         print("No chefs available.")
 
+# Function to allow users to view their hiring request status
+def view_hiring_status(username):
+    """Allows consumers to view the status of their hiring requests."""
+    conn = create_connection()
+    query = '''
+        SELECT Chef_Hires.hire_id, Users.username AS chef_name, Chef_Hires.response, Chef_Hires.message, Chef_Hires.hire_date
+        FROM Chef_Hires
+        INNER JOIN Users ON Chef_Hires.chef_id = Users.user_id
+        WHERE Chef_Hires.consumer_id = (
+            SELECT user_id FROM Users WHERE username = ?
+        )
+    '''
+    cursor = execute_query(conn, query, (username,))
+    hires = fetch_all(cursor)
+    close_connection(conn)
+
+    if hires:
+        print("\nYour Hiring Requests:")
+        for hire_id, chef_name, response, message, hire_date in hires:
+            print(f"Hire ID: {hire_id}, Chef: {chef_name}, Date: {hire_date}")
+            print(f"Status: {response if response else 'Pending'}")
+            if message:
+                print(f"Message from Chef: {message}")
+            print("-" * 50)
+    else:
+        print("You have no hiring requests.") 
+        
 # Displays the chef menu and allows them to choose actions.
 def chef_menu(username):
     """Displays the chef menu."""
@@ -374,7 +401,7 @@ def chef_menu(username):
         print("\nChef Menu:")
         print("1. Create Recipe")
         print("2. View/Edit Portfolio")
-        print("3. View Hiring Notifications")
+        print("3. View and Respond to Hiring Notifications")
         print("4. Exit")
 
         choice = input("What do you wish to do?: ")
