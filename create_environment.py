@@ -276,7 +276,7 @@ conn = create_connection()
         consumer_cursor = execute_query(conn, consumer_query, (username,))
         consumer = fetch_one(consumer_cursor)
 
-if consumer:
+    if consumer:
             consumer_id = consumer[0]
             hire_query = "INSERT INTO Chef_Hires (chef_id, consumer_id) VALUES (?, ?)"
             execute_query(conn, hire_query, (chef_id, consumer_id))
@@ -298,7 +298,7 @@ def chef_menu(username):
 
         choice = input("What do you wish to do?: ")
 
-if choice == '1':
+        if choice == '1':
             create_recipe(username)
         elif choice == '2':
             view_edit_portfolio(username)
@@ -418,3 +418,7 @@ def main():
                 break
             else:
                 print("Invalid choice! Please try again.")
+                
+# The main function is the entry point of the program.
+if __name__ == "__main__":
+    main()
