@@ -6,7 +6,7 @@ import hashlib
 # let's first create connection to database.
 def create_connection():
     """Creates and returns a database connection."""
-    return sqlite3.connect("forks_and_folks")
+    return sqlite3.connect("forks_and_folks.db")
 
 def close_connection(conn):
     """Closes a database connection."""
