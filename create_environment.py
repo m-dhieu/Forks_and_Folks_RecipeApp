@@ -370,3 +370,8 @@ def view_hiring_notifications(username):
     cursor = execute_query(conn, query, (username,))
     hires = fetch_all(cursor)
     close_connection(conn)
+    
+    if hires:
+        print("\nHiring Notifications:")
+        for consumer_name, hire_date in hires:
+            print(f"Consumer: {consumer_name}, Hire Date: {hire_date}")
