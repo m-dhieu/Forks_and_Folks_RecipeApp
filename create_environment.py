@@ -76,7 +76,7 @@ def create_database():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Recipes (
             recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            recipe_name TEXT NOT NULL,
+            recipe_name TEXT NOT NULL UNIQUE,
             ingredients TEXT,
             instructions TEXT,
             chef_id INTEGER,
@@ -88,7 +88,7 @@ def create_database():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Ingredients (
             ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            ingredient_name TEXT NOT NULL,
+            ingredient_name TEXT NOT NULL UNIQUE,
             location TEXT
         )
     ''')
