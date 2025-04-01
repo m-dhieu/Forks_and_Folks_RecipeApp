@@ -37,5 +37,11 @@ def fetch_all(cursor):
     if cursor:
         return cursor.fetchall()
     return None
+    
+def fetch_one(cursor):
+    """ Fetches a single result from a cursor."""
+    if cursor:
+        return cursor.fetchone()
+    return None
 
 
