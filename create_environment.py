@@ -130,3 +130,18 @@ def create_database():
             INSERT OR IGNORE INTO Recipes (recipe_name, ingredients, instructions, chef_id)
             VALUES (?, ?, ?, ?)
         ''', recipe)
+
+    ingredients = [
+        ("Tomatoes", "Kimironko Market"),
+        ("Spaghetti", "250 Stores"),
+        ("Chicken Breast", "Farmer's Choice Butcher Shop"),
+        ("Flour", "Simba Kisimenti Supermarket"),
+        ("Lettuce", "Kimironko Market"),
+        ("Croutons", "T2000 Supermarket"),
+        ("Butter", "Zoe's Bakery"),
+        ("Ground Beef", "Kimironko Market"),
+        ("Cheese", "T2000 Supermarket"),
+        ("Chocolate Chips", "Zoe's Bakery"),
+        ("Buns", "250 Stores"),
+        ("Soy Sauce", "Simba Kimironko")
+    ]
