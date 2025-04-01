@@ -316,3 +316,16 @@ def create_recipe(username):
     query = "SELECT user_id FROM Users WHERE username = ?"
     cursor = execute_query(conn, query, (username,))
     user = fetch_one(cursor)
+    
+    if user:
+        chef_id = user[0]
+        recipe_name = input("Enter recipe name: ")
+        ingredients = input("Enter ingredients (comma-separated): ")
+        instructions = input("Enter instructions: ")
+
+        recipe_query = "INSERT INTO Recipes (recipe_name, ingredients, instructions, chef_id) VALUES (?, ?, ?, ?)"
+        execute_query(conn, recipe_query, (recipe_name, ingredients, instructions, chef_id))
+        print("Recipe created successfully!")
+    else:
+        print("Chef not found.")
+    close_connection(conn)
