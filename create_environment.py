@@ -297,3 +297,15 @@ def chef_menu(username):
         print("4. Exit")
 
         choice = input("What do you wish to do?: ")
+
+if choice == '1':
+            create_recipe(username)
+        elif choice == '2':
+            view_edit_portfolio(username)
+        elif choice == '3':
+            view_hiring_notifications(username)
+        elif choice == '4':
+            print("Exiting chef menu...")
+            break
+        else:
+            print("Invalid choice! Try again.")
