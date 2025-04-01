@@ -244,3 +244,15 @@ def consumer_menu(username):
             break
         else:
             print("Invalid choice! Try again.")
+
+def view_and_hire_chefs(username):
+    """Allows consumers to view chef portfolios and hire chefs."""
+    conn = create_connection()
+    query = '''
+        SELECT Chefs.chef_id, Users.username, Chefs.portfolio_details
+        FROM Chefs
+        INNER JOIN Users ON Chefs.user_id = Users.user_id
+    '''
+    cursor = execute_query(conn, query)
+    chefs = fetch_all(cursor)
+    close_connection(conn)
