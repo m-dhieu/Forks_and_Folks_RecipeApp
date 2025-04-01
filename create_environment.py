@@ -53,6 +53,16 @@ def create_database():
     conn = create_connection()
     cursor = conn.cursor()
 
+ # Create tables
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Users (
+            user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            role TEXT NOT NULL CHECK (role IN ('Chef', 'Consumer'))
+        )
+    ''')
+
 
 
 
