@@ -211,6 +211,16 @@ def login(username, password):
             return user_id, username, role
     return None, None, None
 
+# Allow saving of data
+def save_to_file(data, filename):
+    """Saves data to a file."""
+    try:
+        with open(filename, 'w') as file:
+            file.write(data)
+        print(f"Data successfully saved to {filename}")
+    except Exception as e:
+        print(f"Error saving data to file: {e}")
+        
 # Allows consumers to browse recipes and view details.
 def browse_recipes():
     """Allows users to browse recipes."""
