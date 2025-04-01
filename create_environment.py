@@ -275,3 +275,9 @@ conn = create_connection()
         consumer_query = "SELECT user_id FROM Users WHERE username = ?"
         consumer_cursor = execute_query(conn, consumer_query, (username,))
         consumer = fetch_one(consumer_cursor)
+
+ if consumer:
+            consumer_id = consumer[0]
+            hire_query = "INSERT INTO Chef_Hires (chef_id, consumer_id) VALUES (?, ?)"
+            execute_query(conn, hire_query, (chef_id, consumer_id))
+            print("Chef hired successfully!")
