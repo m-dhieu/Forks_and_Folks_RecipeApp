@@ -12,3 +12,19 @@ def close_connection(conn):
     """Closes a database connection."""
     if conn:
         conn.close()
+
+# Defining the function executes queries  for executing SQL queries
+def execute_query(conn, query, params=None):
+    """Executes a SQL query."""
+    cursor = conn.cursor()
+    try:
+        if params:
+            cursor.execute(query, params)
+        else:
+            cursor.execute(query)
+        conn.commit()
+        return cursor
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return None
+
